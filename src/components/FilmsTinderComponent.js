@@ -1,48 +1,56 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import constants from '../redux/constants/constants'
+import PropTypes from 'prop-types';
 
-@connect(
-    state => ({
-        films: state.films,
-        isLoading: state.isLoading,
-        error: state.error,
-    }),
-    dispatch => ({
-        getFilms(){
-            dispatch({type: constants.GET_FILMS})
-        }
-    })
-)
 export default class FilmsTinderComponent extends Component {
 
-    static propTypes = {
-        films: PropTypes.array,
-        isLoading: PropTypes.bool,
-        error: PropTypes.object
+    state = {
+        moreInfo: false
     }
 
-    componentDidMount = () => this.props.getFilms();
+    static propTypes = {
+        film: PropTypes.object,
+        likeFilm: PropTypes.func.isRequired,
+        dislikeFilm: PropTypes.func.isRequired
+    }
+
+    _handleToggleInfo = moreInfo => this.setState((state, props) => ({ moreInfo }))
     
     render() {
-
-        const { films, isLoading, error } = this.props;
-
+        const { 
+            film: { imageURL, title, summary, rating },
+            isLoading,
+            likeFilm,
+            dislikeFilm
+        } = this.props;
+        const { moreInfo } = this.state;
         return (
-            !isLoading ? 
+            <div className='container'>
                 <div>
+                    <h2>{title} ({rating} / 10)</h2>
+                    {!isLoading ? 
+                        <img 
+                            id='film-image' 
+                            src={`${imageURL}`} 
+                            alt={title}
+                            onClick={this._handleToggleInfo.bind(this, !moreInfo)}
+                        /> : <div id='loading'>isLoading</div> }
+                </div>
+                {moreInfo && <div><p>{summary}</p></div>}
+                {!moreInfo &&
                     <div>
-                        <div>
-                            Rating
-                        </div>
-                        Picture
+                        <button 
+                            className='button' 
+                            id='accept-button' 
+                            onClick={likeFilm.bind(this, this.props.film)}
+                        >&#10004;</button>
+                        <button 
+                            className='button' 
+                            id='reject-button' 
+                            onClick={dislikeFilm.bind(this, this.props.film)}
+                        >&#10006;</button>
                     </div>
-                    <div>
-                        Control Panel
-                        {films.map(film => <p key={films.id}>{film.title}</p> )}
-                    </div>
-                </div> : <div>isLoading...</div>        
+                }
+            </div>
         )
     }
 }

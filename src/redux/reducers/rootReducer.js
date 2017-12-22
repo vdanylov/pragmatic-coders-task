@@ -2,6 +2,8 @@ import constants from '../constants/constants'
 
 const initialState = {
     films: [],
+    accepted: [],
+    rejected: [],
     isLoading: false,
     error: null
 }
@@ -16,11 +18,25 @@ export default (state = initialState, action) => {
     }
   case constants.LIKE_FILM:
     return {
-      ...state
+      ...state,
+      accepted: [
+        ...state.accepted,
+        action.film
+      ],
+      films: [
+        ...state.films.filter(item => item.id != action.film.id)
+      ]
     }
   case constants.DISLIKE_FILM:
     return {
-      ...state
+      ...state,
+      rejected: [
+        ...state.rejected,
+        action.film
+      ],
+      films: [
+        ...state.films.filter(item => item.id != action.film.id)
+      ]
     }
   case constants.SET_LOADING_STATUS:
     return {

@@ -3,11 +3,11 @@ import { call, put, takeEvery, all } from 'redux-saga/effects'
 import constants from '../constants/constants'
 
 function* workerLikeFilmSaga(action){
-  yield call(likeFilm, action.id)
+  yield call(likeFilm, action.film)
 }
 
 function* workerDislkeFilmSaga(action){
-  yield call(dislikeFilm, action.id)
+  yield call(dislikeFilm, action.film)
 }
 
 function* workerGetFilmsSaga() {
@@ -15,7 +15,7 @@ function* workerGetFilmsSaga() {
     yield put({type: constants.SET_LOADING_STATUS, isLoading: true});      
     const films = yield call(getFilms);
     yield put({ type: constants.SAVE_FILMS, films })
-    yield put({type: constants.SET_LOADING_STATUS, isLoading: false});      
+    yield put({type: constants.SET_LOADING_STATUS, isLoading: false});  
   } catch (error) {
     yield put({type: constants.SET_LOADING_STATUS, isLoading: false});      
   }

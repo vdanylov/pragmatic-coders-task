@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import '../styles/App.sass';
 import store from '../redux/store/store'
-import FilmsTinderComponent from './FilmsTinderComponent'
+import FilmsTinderContainer from './FilmsTinderContainer'
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <div className="App">
-          <FilmsTinderComponent />
+          <FilmsTinderContainer />
         </div>
       </Provider>
     );

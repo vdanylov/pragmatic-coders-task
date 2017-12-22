@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 export default class FilmsTinderComponent extends Component {
 
     state = {
-        moreInfo: false
+        moreInfo: false,
+        loaded: false
     }
 
     static propTypes = {
@@ -13,7 +14,17 @@ export default class FilmsTinderComponent extends Component {
         dislikeFilm: PropTypes.func.isRequired
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        const { film: { id } } = this.props;
+        if(id !== nextProps.film.id){
+            this.setState({loaded: false});
+        }
+    }
+    
+
     _handleToggleInfo = moreInfo => this.setState((state, props) => ({ moreInfo }))
+
+    _handleOnImageOnload = () => this.setState({ loaded: true});
     
     render() {
         const { 
@@ -22,23 +33,28 @@ export default class FilmsTinderComponent extends Component {
             likeFilm,
             dislikeFilm
         } = this.props;
-        const { moreInfo } = this.state;
+        const { moreInfo, loaded } = this.state;
         return (
             <div className='container'>
                 <div>
                     <div>
-                        <h3>{title}</h3>
-                        <p>({rating} / 10)</p>
+                        <h3 id='film-title'>{title}</h3>
+                        <p id='film-rating'>({rating} / 10)</p>
                     </div>
-                    {!isLoading ? 
                         <img 
+                            style={{ display: !loaded && 'none'}}
                             id='film-image' 
                             src={`${imageURL}`} 
                             alt={title}
+                            onLoad={this._handleOnImageOnload}
                             onClick={this._handleToggleInfo.bind(this, !moreInfo)}
-                        /> : <div id='loading'>isLoading</div> }
+                        /> 
+                    {!loaded && 
+                        <div id='loading'>
+                            <div id='loading-sign'>isLoading</div>                        
+                        </div>}
                 </div>
-                {moreInfo && <div><p>{summary}</p></div>}
+                {moreInfo && <div id='summary'><p>{summary}</p></div>}
                 {!moreInfo &&
                     <div>
                         <button 

@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         action.film
       ],
       films: [
-        ...state.films.filter(item => item.id != action.film.id)
+        ...state.films.filter(item => item.id !== action.film.id)
       ]
     }
   case constants.DISLIKE_FILM:
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
         action.film
       ],
       films: [
-        ...state.films.filter(item => item.id != action.film.id)
+        ...state.films.filter(item => item.id !== action.film.id)
       ]
     }
   case constants.SET_LOADING_STATUS:
@@ -48,6 +48,8 @@ export default (state = initialState, action) => {
       ...state,
       error: action.error
     }
+  case constants.RESET:
+    return initialState;
   default:
     return state
   }

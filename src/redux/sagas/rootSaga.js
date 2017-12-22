@@ -28,8 +28,9 @@ function* watchLikeDislikeFilms(){
 
 function* watchGetFilms(){
   yield takeEvery('GET_FILMS', workerGetFilmsSaga) // action to get films   
+  yield takeEvery('RESET', workerGetFilmsSaga) // action to get films   
 }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export default function* rootSaga(){
     yield all([

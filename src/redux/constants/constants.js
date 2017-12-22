@@ -6,5 +6,6 @@ export default keyMirror({
     "LIKE_FILM": null,
     "DISLIKE_FILM": null,
     "SET_LOADING_STATUS": null,
-    "SET_LOADING_ERROR": null
+    "SET_LOADING_ERROR": null,
+    "RESET": null,
 })

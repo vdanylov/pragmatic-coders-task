@@ -19,6 +19,9 @@ import FilmsTinderComponent from './FilmsTinderComponent'
         },
         dislikeFilm(film){
             dispatch({type: constants.DISLIKE_FILM, film})
+        },
+        resetFilms(){
+            dispatch({type: constants.RESET})
         }
     })
 )
@@ -35,11 +38,11 @@ export default class FilmsTinderContainer extends Component {
     render() {
 
         const { 
-            error,
             films,
             isLoading,
             likeFilm,
-            dislikeFilm
+            dislikeFilm,
+            resetFilms
         } = this.props;
 
         return (
@@ -57,7 +60,10 @@ export default class FilmsTinderContainer extends Component {
                                 <div>
                                     <h1>No films left :(</h1>
                                     <div>
-                                    <button className='button'>&#9851;</button>
+                                    <button 
+                                        className='button'
+                                        onClick={resetFilms.bind(this)}
+                                    >&#9851;</button>
                                     </div>
                                 </div>
                         }

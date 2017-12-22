@@ -23,27 +23,40 @@
  
 .container
   margin: 0 auto;
-  width: 250px;
+  width: 350px;
   height: 400px;
 
 #title-header
   color: #DE442A;
 
+#film-title
+  font-size: 20px;
+  margin-bottom: 2px;
+
+#film-rating
+  margin: 5px 0;
+  font-size: 13px;
+
 #film-image
-  max-width: 250px;
+  max-width: 100%;
   max-height: 400px;
-  width: 250px;
+  height: auto;
   border-radius: 10px;
 
 #loading
-  max-width: 250px;
+  position: relative;
+  max-width: 100%;
   max-height: 400px;
-  width: 250px;
-  height: 250px;
+  height: 300px;
   border-radius: 7px;
 
+#loading-sign
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
 .button
-  // background-color: #4CAF50; /* Green */
   border: 5px solid #eee;
   border-radius: 50%;
   color: white;
@@ -66,4 +79,32 @@
   float: left;
   background-color: transparentize(#AF4C50, 0.4);  
   margin-left: 20px;  
-  font-size: 20px;  
+  font-size: 20px;
+
+$breakpoint-tablet: 767px;
+@media (max-width: $breakpoint-tablet)
+  body
+    background-color: #F7F9FC;
+
+  #film-rating
+    font-size: 13px;
+
+  #summary
+    width: 95%;
+
+  .container
+    margin: 0;
+    width: 365px;
+  
+  #film-image
+    max-width: 100%;
+    max-height: 400px;
+    width: 340px;
+    height: auto;
+    
+  #reject-button
+    margin-left: 50px;
+
+  #accept-button
+    margin-right: 50px;
+  

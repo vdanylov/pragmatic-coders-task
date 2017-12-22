@@ -26,7 +26,10 @@ export default class FilmsTinderComponent extends Component {
         return (
             <div className='container'>
                 <div>
-                    <h2>{title} ({rating} / 10)</h2>
+                    <div>
+                        <h3>{title}</h3>
+                        <p>({rating} / 10)</p>
+                    </div>
                     {!isLoading ? 
                         <img 
                             id='film-image' 

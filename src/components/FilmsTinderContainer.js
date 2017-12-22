@@ -53,7 +53,13 @@ export default class FilmsTinderContainer extends Component {
                                 likeFilm={likeFilm}
                                 dislikeFilm={dislikeFilm}
                             /> : 
-                            !isLoading && <div>No films left :(</div>
+                            !isLoading && 
+                                <div>
+                                    <h1>No films left :(</h1>
+                                    <div>
+                                    <button className='button'>&#9851;</button>
+                                    </div>
+                                </div>
                         }
                     </div>
                 </div>
